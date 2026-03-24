@@ -24,34 +24,26 @@ export default function Login() {
     setError("");
     setIsLoading(true);
 
-    // Small delay to show loading state
-    setTimeout(() => {
-      const result = login(email, password);
-      
-      if (result.success) {
-        navigate("/consent");
-      } else {
-        setError(result.error || "Login failed");
-      }
+    const result = login(email, password);
+    if (result.success) {
+      navigate("/consent");
+    } else {
+      setError(result.error || "Login failed");
       setIsLoading(false);
-    }, 300);
+    }
   };
 
   const handleCreateAccount = () => {
     setError("");
     setIsLoading(true);
 
-    // Small delay to show loading state
-    setTimeout(() => {
-      const result = createAccount(email, password);
-      
-      if (result.success) {
-        navigate("/consent");
-      } else {
-        setError(result.error || "Account creation failed");
-      }
+    const result = createAccount(email, password);
+    if (result.success) {
+      navigate("/consent");
+    } else {
+      setError(result.error || "Account creation failed");
       setIsLoading(false);
-    }, 300);
+    }
   };
 
   return (
@@ -173,7 +165,7 @@ export default function Login() {
         {/* Footer text */}
         <div className="text-center mt-12">
           <p className="text-xs text-white/20 font-mono tracking-wide">
-            v2.4.1 — Secure Neural Interface
+            Emology — Emotion Mapping System
           </p>
         </div>
       </div>

@@ -22,12 +22,12 @@ import { clone as skeletonClone } from "three/examples/jsm/utils/SkeletonUtils.j
 //  • External URLs must be CORS-accessible (GitHub raw, CDN, R2, etc.)
 // ─────────────────────────────────────────────────────────────────────────────
 const MODEL_URLS: Record<string, string> = {
-  Joy:     "https://raw.githubusercontent.com/Michh1810/Emotology/main/Joy.glb",
-  Anger:   "https://raw.githubusercontent.com/Michh1810/Emotology/main/Anger.glb",
-  Sadness: "https://raw.githubusercontent.com/Michh1810/Emotology/main/Sadness1.glb",
-  Fear:    "https://raw.githubusercontent.com/Michh1810/Emotology/main/Fear.glb",
-  Disgust: "https://raw.githubusercontent.com/Michh1810/Emotology/main/Disgust.glb",
-  Envy:    "https://raw.githubusercontent.com/Michh1810/Emotology/main/Envy.glb",
+  Joy:     "https://raw.githubusercontent.com/Michh1810/Emology/main/Joy.glb",
+  Anger:   "https://raw.githubusercontent.com/Michh1810/Emology/main/Anger.glb",
+  Sadness: "https://raw.githubusercontent.com/Michh1810/Emology/main/Sadness1.glb",
+  Fear:    "https://raw.githubusercontent.com/Michh1810/Emology/main/Fear.glb",
+  Disgust: "https://raw.githubusercontent.com/Michh1810/Emology/main/Disgust.glb",
+  Envy:    "https://raw.githubusercontent.com/Michh1810/Emology/main/Envy.glb",
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -152,7 +152,7 @@ const CITY_WIDTH = CITY_MAX_X - CITY_MIN_X; // 24 units
 const CITY_DEPTH = CITY_MAX_Z - CITY_MIN_Z; // 24 units
 
 // ── Walker constants ─────────────────────────────────────────────────────────
-const WALKER_URL = "https://raw.githubusercontent.com/Michh1810/Emotology/main/Walking.glb";
+const WALKER_URL = "https://raw.githubusercontent.com/Michh1810/Emology/main/Walking.glb";
 const WALKER_SPEED = 0.95;      // world units per second (2× slower)
 const WALKER_SCALE = 0.008;      // final height of the figure (world units)
 const WALKER_PROXIMITY = 6.5;   // distance to trigger color change
@@ -1426,11 +1426,13 @@ export default function CityMap() {
         emotion={selectedEmotion}
       />
 
-      {/* Demo Panel - Hidden by default, toggle with Shift + D */}
-      <DemoPanel
-        emotions={emotions}
-        onEmotionChange={setEmotions}
-      />
+      {/* Demo Panel - Dev only, toggle with Shift + D */}
+      {import.meta.env.DEV && (
+        <DemoPanel
+          emotions={emotions}
+          onEmotionChange={setEmotions}
+        />
+      )}
 
       {/* Emotion Alert System */}
       <EmotionAlertSystem

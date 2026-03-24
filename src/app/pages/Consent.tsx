@@ -31,10 +31,7 @@ export default function Consent() {
     localStorage.setItem("emotion_city_user_name", name.trim());
     localStorage.setItem("emotion_city_consent_given", "true");
 
-    // Small delay to show loading state
-    setTimeout(() => {
-      navigate("/scan");
-    }, 300);
+    navigate("/scan");
   };
 
   const canContinue = name.trim().length > 0 && consent;

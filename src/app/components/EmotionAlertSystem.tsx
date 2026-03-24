@@ -33,7 +33,7 @@ export function EmotionAlertSystem({
     const newlyTriggered: Emotion[] = [];
 
     emotions.forEach((emotion) => {
-      if (emotion.value >= ALERT_THRESHOLD) {
+      if ((emotion.value ?? 0) >= ALERT_THRESHOLD) {
         newAlerts.add(emotion.name);
         
         // Check if this is a new alert (not previously notified)
@@ -46,7 +46,7 @@ export function EmotionAlertSystem({
     // Show toast notifications for newly triggered alerts
     newlyTriggered.forEach((emotion) => {
       toast.error(`Emotion Alert: ${emotion.name} spike detected`, {
-        description: `Your ${emotion.name} level is at ${emotion.value}%. Click the alert icon for suggestions.`,
+        description: `Your ${emotion.name} level is at ${emotion.value ?? 0}%. Click the alert icon for suggestions.`,
         duration: 5000,
         style: {
           background: '#0a0a0a',
@@ -67,7 +67,7 @@ export function EmotionAlertSystem({
 
     // Remove from notified if emotion goes below threshold
     emotions.forEach((emotion) => {
-      if (emotion.value < ALERT_THRESHOLD && notifiedEmotions.has(emotion.name)) {
+      if ((emotion.value ?? 0) < ALERT_THRESHOLD && notifiedEmotions.has(emotion.name)) {
         setNotifiedEmotions(prev => {
           const updated = new Set(prev);
           updated.delete(emotion.name);

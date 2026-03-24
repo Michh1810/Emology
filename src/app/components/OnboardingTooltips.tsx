@@ -110,8 +110,17 @@ export function OnboardingTooltips({ open, onClose }: OnboardingTooltipsProps) {
     setIsVisible(false);
     setTimeout(updatePosition, 50);
 
-    window.addEventListener("resize", updatePosition);
-    return () => window.removeEventListener("resize", updatePosition);
+    let resizeTimer: ReturnType<typeof setTimeout>;
+    const onResize = () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(updatePosition, 150);
+    };
+
+    window.addEventListener("resize", onResize);
+    return () => {
+      window.removeEventListener("resize", onResize);
+      clearTimeout(resizeTimer);
+    };
   }, [currentStep, open]);
 
   const handleNext = () => {
